@@ -9,17 +9,17 @@ E:\Program Files\2020.3.22f1\Editor\Unity.exe
 -batchMode
 -noUpm
 -name
-AssetImportWorker2
+AssetImportWorker1
 -projectPath
 E:/Fellipe L/Projetos/Projetos UNITY/2D-Test/2D-Test
 -logFile
-Logs/AssetImportWorker2.log
+Logs/AssetImportWorker1.log
 -srvPort
-57796
+62525
 Successfully changed project path to: E:/Fellipe L/Projetos/Projetos UNITY/2D-Test/2D-Test
 E:/Fellipe L/Projetos/Projetos UNITY/2D-Test/2D-Test
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 160.63 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 102.78 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
 [Subsystems] Discovering subsystems at path E:/Program Files/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
@@ -35,92 +35,92 @@ Initialize mono
 Mono path[0] = 'E:/Program Files/2020.3.22f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Program Files/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'E:/Program Files/2020.3.22f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56320
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56532
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Program Files/2020.3.22f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/Program Files/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.002362 seconds.
+Registered in 0.003461 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 98.14 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 109.76 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  4.333 seconds
+- Completed reload, in  2.415 seconds
 Domain Reload Profiling:
-	ReloadAssembly (4333ms)
-		BeginReloadAssembly (141ms)
+	ReloadAssembly (2416ms)
+		BeginReloadAssembly (117ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1294ms)
-			LoadAssemblies (139ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (601ms)
+			CreateAndSetChildDomain (2ms)
+		EndReloadAssembly (1048ms)
+			LoadAssemblies (115ms)
+			RebuildTransferFunctionScriptingTraits (1ms)
+			SetupTypeCache (368ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (69ms)
-			SetupLoadedEditorAssemblies (430ms)
+			RebuildScriptCaches (72ms)
+			SetupLoadedEditorAssemblies (416ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (32ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (98ms)
-				BeforeProcessingInitializeOnLoad (21ms)
-				ProcessInitializeOnLoadAttributes (214ms)
-				ProcessInitializeOnLoadMethodAttributes (63ms)
+				InitializePlatformSupportModulesInManaged (13ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (110ms)
+				BeforeProcessingInitializeOnLoad (28ms)
+				ProcessInitializeOnLoadAttributes (199ms)
+				ProcessInitializeOnLoadMethodAttributes (64ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.006758 seconds.
+Registered in 0.011705 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 94.42 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 89.12 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.598 seconds
+- Completed reload, in  2.212 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2600ms)
-		BeginReloadAssembly (301ms)
+	ReloadAssembly (2214ms)
+		BeginReloadAssembly (289ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (9ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (45ms)
-		EndReloadAssembly (2158ms)
-			LoadAssemblies (192ms)
+			CreateAndSetChildDomain (39ms)
+		EndReloadAssembly (1811ms)
+			LoadAssemblies (180ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (706ms)
+			SetupTypeCache (627ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (107ms)
-			SetupLoadedEditorAssemblies (911ms)
+			RebuildScriptCaches (102ms)
+			SetupLoadedEditorAssemblies (681ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (9ms)
+				InitializePlatformSupportModulesInManaged (8ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (95ms)
-				BeforeProcessingInitializeOnLoad (135ms)
-				ProcessInitializeOnLoadAttributes (627ms)
-				ProcessInitializeOnLoadMethodAttributes (40ms)
-				AfterProcessingInitializeOnLoad (6ms)
+				RefreshPlugins (89ms)
+				BeforeProcessingInitializeOnLoad (155ms)
+				ProcessInitializeOnLoadAttributes (392ms)
+				ProcessInitializeOnLoadMethodAttributes (31ms)
+				AfterProcessingInitializeOnLoad (5ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
+			AwakeInstancesAfterBackupRestoration (12ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.49 seconds
-Refreshing native plugins compatible for Editor in 1.40 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.23 seconds
+Refreshing native plugins compatible for Editor in 1.08 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2202 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 96.3 MB.
 System memory in use after: 96.4 MB.
 
 Unloading 28 unused Assets to reduce memory usage. Loaded Objects now: 2635.
-Total: 32.551178 ms (FindLiveObjects: 0.427960 ms CreateObjectMapping: 0.111277 ms MarkObjects: 31.857975 ms  DeleteObjects: 0.151868 ms)
+Total: 6.325965 ms (FindLiveObjects: 0.425860 ms CreateObjectMapping: 0.110577 ms MarkObjects: 5.634161 ms  DeleteObjects: 0.153268 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -135,16 +135,33 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Packages/com.unity.2d.tilemap.extras/package.json
-  artifactKey: Guid(a9f15b7c9363d9944a7d69248fd279ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.2d.tilemap.extras/package.json using Guid(a9f15b7c9363d9944a7d69248fd279ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e14cd21a22aea8e4d2359855a570b6c') in 0.073782 seconds 
-  Import took 0.079815 seconds .
+  path: Assets/Tiles/Plants/Flower B.asset
+  artifactKey: Guid(0b851da08067f984697c8ff5da2402c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/Plants/Flower B.asset using Guid(0b851da08067f984697c8ff5da2402c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7902ad4322e653b1d0bc33141d5f178') in 0.501352 seconds 
+  Import took 0.518320 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 329.875791 seconds.
-  path: Assets/TopDown 2D RPG BE3/App Icon.png
-  artifactKey: Guid(e15a0aaf619d8aa429bd091186fb29a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/TopDown 2D RPG BE3/App Icon.png using Guid(e15a0aaf619d8aa429bd091186fb29a2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2830daf5ad604355086d5c4ffa7417c4') in 0.831904 seconds 
-  Import took 0.938600 seconds .
+  Time since last request: 0.000737 seconds.
+  path: Assets/Tiles/Plants/Flower A.asset
+  artifactKey: Guid(b41fca51d72b0cc4d823dfba087d0138) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/Plants/Flower A.asset using Guid(b41fca51d72b0cc4d823dfba087d0138) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3be6a48fc5a4dc0a49862df0f277c9bc') in 0.012519 seconds 
+  Import took 0.237828 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000370 seconds.
+  path: Assets/Tiles/Plants/Tree.asset
+  artifactKey: Guid(c3340692f212a8148832e1075e3978cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/Plants/Tree.asset using Guid(c3340692f212a8148832e1075e3978cb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dade276518560fac902bd35dda5b3065') in 0.105179 seconds 
+  Import took 0.200938 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000457 seconds.
+  path: Assets/Tiles/Plants/Plant.asset
+  artifactKey: Guid(4f0818d860c9c5a4ca5fdcad816e1b39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Tiles/Plants/Plant.asset using Guid(4f0818d860c9c5a4ca5fdcad816e1b39) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22683c95b1fd3c1fbe76997c8b215074') in 0.055581 seconds 
+  Import took 0.143987 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
