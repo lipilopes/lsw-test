@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Scriptables/Npc", menuName = "Scriptable/Npc", order = 1)]
 public class NpcScriptable : MobScriptable
 {
-    [SerializeField] Dialogue[] _dialogues;
-    public Dialogue[] Dialogues { get { return _dialogues;}}
+    [SerializeField]
+    private Dialogue[] _dialogues;
+    public  Dialogue[] Dialogues { get { return _dialogues;}}
+
+    public Sprite Portrait(int dialogueIndex)
+    {
+        return _portrait[(int)Dialogues[dialogueIndex].portraitFeeling];
+    }
 }
