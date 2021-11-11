@@ -5,11 +5,21 @@ using UnityEngine;
 [System.Serializable] 
 public enum Emotions
 {
+    None,
     Angry,
     Love,
     Exclamation_Mark,
     Question_Mark,
     Speaking
+}
+
+[System.Serializable] 
+public enum PortraitFeeling 
+{
+    Idle,
+    Smile,
+    Talk,
+    Angry
 }
 
 public class GameManager : MonoBehaviour
@@ -22,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public Sprite EmotionBallon(Emotions e)
     {
-       return emotions[(int)e];
+       return emotions[(int)e-1];
     }
    
     private void Awake() 
