@@ -6,11 +6,14 @@ using UnityEngine;
 public class CameraSystem : MonoBehaviour
 {
     [Header("Follow Cam")]
-    [SerializeField] Transform  target;
-	[SerializeField] float      smoothSpeed = 0.125f;
-	[SerializeField] Vector3    offset;
+    [SerializeField]
+    private Transform  target;
+	[SerializeField]
+    private float      smoothSpeed = 0.125f;
+	[SerializeField]
+    private Vector3    offset;
 
-    Vector3 TargetPosition { get { return (target.position + offset); } }
+    private Vector3 TargetPosition { get { return (target.position + offset); } }
 
 
     public enum ShakeCamType
@@ -23,11 +26,15 @@ public class CameraSystem : MonoBehaviour
     #if UNITY_EDITOR
     [Header("Only Test")]
     [ContextMenuItem("Shake This Cam", "TESTESHAKE")]
-    [SerializeField] float          _duration = 1;
+    [SerializeField]
+    private float          _duration = 1;
     [Range (0,3)]
-    [SerializeField] float          _magnitude =1;
-    [SerializeField] ShakeCamType   _shakeCamType;
-    [SerializeField] bool           _followPlayer;
+    [SerializeField]
+    private float          _magnitude =1;
+    [SerializeField]
+    private ShakeCamType   _shakeCamType;
+    [SerializeField]
+    private bool           _followPlayer;
 
 
     void TESTESHAKE()
@@ -38,9 +45,9 @@ public class CameraSystem : MonoBehaviour
 
     void FixedUpdate ()
 	{
-		Vector3 desiredPosition = TargetPosition;
-		Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-		transform.position = smoothedPosition;
+		Vector3 desiredPosition     = TargetPosition;
+		Vector3 smoothedPosition    = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+		transform.position          = smoothedPosition;
 	}
 
     public void ChangeTarget(Transform newTarget,bool flash= false)
@@ -62,9 +69,11 @@ public class CameraSystem : MonoBehaviour
 
         Vector3 originalPos = transform.localPosition;
 
-        float elapsed = 0f;
-        float minX = -1,maxX = 1,
-              minY = -1,maxY = 1;
+        float   elapsed = 0f;
+        float   minX    = -1;
+        float   maxX    = 1;              
+        float   minY    = -1;
+        float   maxY    = 1;
 
             switch (shakeType)
             {
@@ -93,9 +102,6 @@ public class CameraSystem : MonoBehaviour
 
              yield return null;
         }
-
-        //transform.localPosition = originalPos;
     }
-
     #endregion
 }
