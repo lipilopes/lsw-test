@@ -11,14 +11,16 @@ public class PlayerMoviment : MonoBehaviour
 
     Rigidbody2D rb;
     Animator anim;
+    MobsClothes mobClothes;
 
     bool canMove = true;
     public bool CanMove {set{    canMove = value; } }
 
-    void Awake() 
-    {
-        rb      = GetComponent<Rigidbody2D>();
-        anim    = GetComponent<Animator>();
+    void Start() 
+    {      
+        rb          = GetComponent<Rigidbody2D>();
+        anim        = GetComponent<Animator>();
+        mobClothes  = GetComponent<MobsClothes>();
     }
 
     private void Update() 
@@ -39,6 +41,9 @@ public class PlayerMoviment : MonoBehaviour
 
     void Anim()
     {
+        if(mobClothes!=null)
+            mobClothes.AnimClothes(movement.sqrMagnitude, movement.x, movement.y);
+
         if(anim == null)
             return;
 
