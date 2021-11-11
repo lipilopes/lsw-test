@@ -19,11 +19,27 @@ MonoBehaviour:
   - {fileID: 21300010, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   - {fileID: 21300014, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   _dialogues:
-  - playerSpeaking: 0
+  - text: Hello!!!
+    playerSpeaking: 0
+    showNpcPortrait: 1
     portraitFeeling: 2
-    emotionBallon: 5
-    text: Hello!!!!
-  - playerSpeaking: 1
+    showPlayerPortrait: 0
+    playerPortraitFeeling: 0
+    emotionBalloon: 6
+    playerEmotionBalloon: 4
+  - text: Hello Jorge!!!
+    playerSpeaking: 1
+    showNpcPortrait: 1
     portraitFeeling: 1
-    emotionBallon: 0
-    text: Hello!
+    showPlayerPortrait: 1
+    playerPortraitFeeling: 2
+    emotionBalloon: 3
+    playerEmotionBalloon: 6
+  - text: Byee
+    playerSpeaking: 0
+    showNpcPortrait: 1
+    portraitFeeling: 1
+    showPlayerPortrait: 0
+    playerPortraitFeeling: 1
+    emotionBalloon: 6
+    playerEmotionBalloon: 0
