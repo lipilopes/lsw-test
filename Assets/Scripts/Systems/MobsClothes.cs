@@ -15,22 +15,26 @@ public class MobsClothes : MonoBehaviour
     [ContextMenuItem("Test Clothes", "TestClothes")]
     #endif
     [Header("Tshirt")]
-    [SerializeField] GameObject tshirtObj;
+    [SerializeField]
+    private GameObject tshirtObj;
 
-    [SerializeField] ClothesScriptable tshirt;
-    public ClothesScriptable Tshirt{ get { return tshirt; } }
+    [SerializeField]
+    private ClothesScriptable tshirt;
+    public  ClothesScriptable Tshirt{ get { return tshirt; } }
 
-    Animator tshirtAnim;
-    SpriteRenderer tshirtSpriteR;
+    private Animator        tshirtAnim;
+    private SpriteRenderer  tshirtSpriteR;
 
     [Header("Glasses")]
-    [SerializeField] GameObject glassesObj;
+    [SerializeField]
+    private GameObject glassesObj;
 
-    [SerializeField] ClothesScriptable glasses;
-    public ClothesScriptable Glasses{ get { return glasses; } }
+    [SerializeField]
+    private ClothesScriptable glasses;
+    public  ClothesScriptable Glasses{ get { return glasses; } }
 
-    Animator glassesAnim;
-    SpriteRenderer glassesSpriteR;
+    private Animator glassesAnim;
+    private SpriteRenderer glassesSpriteR;
 
     private void Start() 
     {
