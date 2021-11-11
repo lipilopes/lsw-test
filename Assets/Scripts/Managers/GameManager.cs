@@ -6,11 +6,12 @@ using UnityEngine;
 public enum Emotions
 {
     None,
+    Default,
     Angry,
     Love,
     Exclamation_Mark,
     Question_Mark,
-    Speaking
+    Speaking,
 }
 
 [System.Serializable] 
@@ -26,13 +27,16 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Emotions")]
-    [Tooltip("[Angry] - [S2] - [!] - [?] - [...]")]
-    [SerializeField] Sprite[] emotions;
+    [SerializeField] GameObject player;
+    public GameObject Player { get { return player; } }
 
-    public Sprite EmotionBallon(Emotions e)
+    [Header("Emotions")]
+    [SerializeField] 
+    private Sprite[] emotions;
+
+    public Sprite EmotionBalloon(Emotions e)
     {
-       return emotions[(int)e-1];
+        return emotions[(int)e];
     }
    
     private void Awake() 
