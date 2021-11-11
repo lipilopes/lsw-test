@@ -5,30 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class NpcManager : MonoBehaviour
 {
-    [SerializeField] NpcScriptable scriptable;
+    [SerializeField] NpcScriptable  scriptable;
     [Header("Interaction")]
-    [SerializeField] bool playerInRange = false;
-    [SerializeField] SpriteRenderer emoteSpriteRender;
+    [SerializeField] bool           playerInRange = false;
+    [SerializeField] Emotions       defaultEmotion = Emotions.Exclamation_Mark;
 
-    SpriteRenderer spriteRender;
-    bool interaction = false; 
+    bool interaction = false;
+
+    EmotionBallonManager    emotion;
+    SpriteRenderer          spriteRender; 
 
     private void Awake() 
     {
         spriteRender = GetComponent<SpriteRenderer>();
+        emotion      = GetComponent<EmotionBallonManager>();
 
         LoadScriptable();
 
         playerInRange = false;
-        Emote();
+        Emotion();
     }
 
     private void Update() 
     {
         if(Input.GetKeyDown(KeyCode.Space) && playerInRange)
-        {
-            Interaction();
-        }    
+            Interaction();  
     }
 
     void LoadScriptable()
@@ -36,7 +37,6 @@ public class NpcManager : MonoBehaviour
         if(scriptable == null)
             return;
 
-        spriteRender.sprite = scriptable.Sprite;
         name = "Npc - "+scriptable.name;
     }
 
@@ -45,7 +45,7 @@ public class NpcManager : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             playerInRange = true;
-            Emote();
+            Emotion();
         }
     }
 
@@ -54,29 +54,46 @@ public class NpcManager : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             playerInRange = false;
-            Emote();
+            Emotion();
+            
+            if(interaction)
+                Interaction();
         }
 
         print(other.gameObject.name);
     }
 
-    private void Emote()
+    private void Emotion()
     {
-        emoteSpriteRender.gameObject.SetActive(playerInRange);
+        if(emotion)
+            emotion.EmotionBallon(playerInRange,defaultEmotion);
     }
 
     private void Interaction()
     {
         interaction = !interaction;
 
-        Debug.Log("Interaction -> "+interaction);
-
         if(interaction)
-            HudManager.Instance.ChatPanel("TESTTEEE",scriptable.Name,scriptable.Portrait(0));
+        {
+            MobsClothes mC = GetComponent<MobsClothes>();
+            ClothesScriptable tshirt = mC!=null ? mC.Tshirt : null;
+            ClothesScriptable glasses = mC!=null ? mC.Glasses : null;
+
+            HudManager.Instance.ChatPanel(
+                scriptable.Dialogues[0].text,
+                scriptable.Name,
+                scriptable.Portrait(scriptable.Dialogues[0].portraitFeeling),
+                tshirt,
+                glasses);
+                
+            emotion.EmotionBallon(true,scriptable.Dialogues[0].emotionBallon);
+        }
         else
+        {
             HudManager.Instance.CloseChatPanel();
 
-        emoteSpriteRender.sprite = GameManager.Instance.EmotionBallon(interaction ? Emotions.Speaking : Emotions.Exclamation_Mark);
+            emotion.EmotionBallon(true,defaultEmotion);
+        }
     }
 
 }
