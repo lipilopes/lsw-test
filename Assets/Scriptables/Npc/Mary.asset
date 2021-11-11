@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf308a92d2fe0344bab904a7b3ccf990, type: 3}
-  m_Name: Jorge
+  m_Name: Mary
   m_EditorClassIdentifier: 
-  _name: Jorge
+  _name: Mary
   _portrait:
-  - {fileID: 21300008, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-  - {fileID: 21300012, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-  - {fileID: 21300010, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-  - {fileID: 21300014, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
-  _dialogues:
+  - {fileID: 21300000, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  - {fileID: 21300004, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  - {fileID: 21300002, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  - {fileID: 21300006, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  dialogue:
   - playerSpeaking: 0
-    portraitFeeling: 2
-    emotionBallon: 5
-    text: Hello!!!!
+    portraitFeeling: 1
+    emotionBallon: 2
+    text: Hello {NAME}, .......
   - playerSpeaking: 1
     portraitFeeling: 1
     emotionBallon: 0
-    text: Hello!
+    text: Hello!!!
