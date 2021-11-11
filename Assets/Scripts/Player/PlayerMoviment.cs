@@ -5,16 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMoviment : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 2.5f;
+    [SerializeField]
+    private float moveSpeed = 2.5f;
 
-    Vector2 movement;
+    private Vector2 movement;
 
-    Rigidbody2D rb;
-    Animator anim;
-    MobsClothes mobClothes;
+    private Rigidbody2D rb;
+    private Animator anim;
+    private MobsClothes mobClothes;
 
-    bool canMove = true;
-    public bool CanMove {set{    canMove = value; } }
+    private bool canMove = true;
+    public  bool CanMove { set { canMove = value; } }
 
     void Start() 
     {      
@@ -47,8 +48,8 @@ public class PlayerMoviment : MonoBehaviour
         if(anim == null)
             return;
 
-        anim.SetFloat("Horizontal",movement.x);
-        anim.SetFloat("Vertical",movement.y);
-        anim.SetFloat("Speed",movement.sqrMagnitude);
+        anim.SetFloat("Horizontal", movement.x);
+        anim.SetFloat("Vertical",   movement.y);
+        anim.SetFloat("Speed",      movement.sqrMagnitude);
     }
 }

@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(MobsClothes),typeof(MobsClothes),typeof(PlayerMoviment))]
-[RequireComponent(typeof(EmotionBallonManager))]
+[RequireComponent(typeof(MobsClothes),typeof(EmotionBalloonManager),typeof(PlayerMoviment))]
 public class PlayerManager : MonoBehaviour
 {
-   [SerializeField] MobScriptable scriptable;
+   [SerializeField] 
+   private  MobScriptable  scriptable;
    
+   private  MobsClothes    clothes;
 
-   public MobScriptable GetScriptable{get { return scriptable;} }
+   private void Start() 
+   {
+      clothes = GetComponent<MobsClothes>();
+   }
+   
+   public MobScriptable GetScriptable{ get { return scriptable;} }
+
+   public MobsClothes GetClothes{ get { return clothes;} }
 }
