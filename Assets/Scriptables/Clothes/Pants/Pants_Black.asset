@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8fe2ac8cb86d7a4bab9fde4649c88f9, type: 3}
-  m_Name: Tshirt_Blue
+  m_Name: Pants_Black
   m_EditorClassIdentifier: 
-  _name: Blue T-shirt
+  _name: Black Pants
   _portraitSprite: {fileID: 21300000, guid: 03653f13e0610d04e89033039491b405, type: 3}
   _clothesType: 0
   _isMultColor: 1
-  _color: {r: 0.28235295, g: 0.5176471, b: 0.8313726, a: 1}
+  _color: {r: 0, g: 0, b: 0, a: 1}
   ControllerName: PlayerClothes
