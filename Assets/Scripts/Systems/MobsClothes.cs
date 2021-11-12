@@ -36,6 +36,8 @@ public class MobsClothes : MonoBehaviour
     private Animator glassesAnim;
     private SpriteRenderer glassesSpriteR;
 
+    bool isPlayer = false;
+
     private void Start() 
     {
         tshirtAnim  = tshirtObj.GetComponent<Animator>();
@@ -43,6 +45,19 @@ public class MobsClothes : MonoBehaviour
 
         tshirtSpriteR  = tshirtObj.GetComponent<SpriteRenderer>();
         glassesSpriteR = glassesObj.GetComponent<SpriteRenderer>();
+
+        isPlayer = GetComponent<PlayerManager>();
+
+        if(isPlayer)
+        {
+            string ts  = PlayerPrefs.GetString("PlayerTshit");
+            string gss = PlayerPrefs.GetString("PlayerGlasses");
+            
+            if(ts != "")
+                tshirt  = GameManager.Instance.GetClothesByName(ts);
+            if(gss != "")
+                glasses = GameManager.Instance.GetClothesByName(gss);
+        }
 
         if(tshirt!=null)
             ChangeTshirt(tshirt);
@@ -100,8 +115,10 @@ public class MobsClothes : MonoBehaviour
                 tshirtObj.name = "Pants "+tshirt.Name;
             #endif
         }
-        
 
+        if(isPlayer)
+            PlayerPrefs.SetString("PlayerTshit",""+tshirt.Name);
+        
         return true;
     }
 
@@ -112,7 +129,7 @@ public class MobsClothes : MonoBehaviour
                 return false;
         #endif
 
-        if(newGlasses == null || newGlasses.ClothesType != ClothesEnum.Glasses || glassesObj==null || glasses.ControllerPath == null || glassesAnim == null || glassesSpriteR == null)
+        if(newGlasses == null || newGlasses.ClothesType != ClothesEnum.Glasses || glassesObj==null || newGlasses.ControllerPath == null || glassesAnim == null || glassesSpriteR == null)
         {
             glasses = null;
 
@@ -137,6 +154,26 @@ public class MobsClothes : MonoBehaviour
             #endif
         }
 
+        if(isPlayer)
+            PlayerPrefs.SetString("PlayerGlasses",""+glasses.Name);
+
         return true;
+    }
+
+    public bool ChangeClothe(ClothesScriptable newClothe)
+    {
+        #if !UNITY_EDITOR
+            if(tshirt == newTshirt)
+                return false;
+        #endif
+
+        switch (newClothe.ClothesType)
+        {
+            default:break;
+            case ClothesEnum.Tshirt:  ChangeTshirt(newClothe); break;
+            case ClothesEnum.Glasses: ChangeGlasses(newClothe); break;
+        }
+
+        return false;
     }
 }
