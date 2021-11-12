@@ -72,19 +72,61 @@ public class NpcInteractions : MonoBehaviour
                 interaction = (bool)value;
         }
 
+
+        switch (scriptable.Type)
+        {
+            default:
+
+            break;
+
+            case NpcType.Speaker:
+                OpenChat();
+            break;
+
+            case NpcType.Shopkeeper:
+                OpenChat(true);
+            break;
+        }      
+    }
+
+    void InteractionEnd()
+    {
+        playerEmotion.EmotionBalloon(false);
+        
+        switch (scriptable.Type)
+        {
+            default:
+
+            break;
+
+            case NpcType.Speaker:     
+                inChat = false;
+                HudChatManager.Instance.CloseChatPanel(); 
+            break;
+
+            case NpcType.Shopkeeper:
+                HudShopManager.Instance.CloseShop();
+            break;
+        }
+
+
+    }
+
+    void OpenChat(bool openShop=false)
+    {
         if(interaction)
         {
             int i = -1;
 
             if(inChat)
             {
-                i = HudManager.Instance.NextDialogue(); 
+                i = HudChatManager.Instance.NextDialogue(); 
             }
             else
             {
                 inChat = true; 
 
-                i = HudManager.Instance.SetDialogue(scriptable,manager.GetClothes);          
+                i = HudChatManager.Instance.SetDialogue(scriptable,manager.GetClothes);          
             }
 
             if(i == -1)
@@ -92,21 +134,28 @@ public class NpcInteractions : MonoBehaviour
                 playerEmotion.EmotionBalloon(false);
                 inChat = false;
                 Emotion();
+
+                if(openShop)
+                    OpenShop();
+
                 return;
             }
 
-            Dialogue d = scriptable.Dialogues[i];           
-            playerEmotion.EmotionBalloon(true,d.playerEmotionBalloon);     
+            Dialogue d = scriptable.Dialogues[i];  
+            playerEmotion.EmotionBalloon(true,d.playerEmotionBalloon); 
             Emotion(true,d.emotionBalloon);
-
         }
         else
-        {
-            playerEmotion.EmotionBalloon(false);
+        {           
+            InteractionEnd();          
+        }        
+    }
 
-            inChat = false;
-
-            HudManager.Instance.CloseChatPanel();           
-        }
+    void OpenShop()
+    {
+        HudShopManager.Instance.CloseShop();
+        
+        if(scriptable.StoreList.Count > 0)
+            HudShopManager.Instance.OpenShop(scriptable.StoreList);
     }
 }
