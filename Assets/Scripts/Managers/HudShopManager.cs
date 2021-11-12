@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class HudShopManager : MonoBehaviour
 {
     public static HudShopManager Instance;
 
+    [SerializeField]
+    private     TextMeshProUGUI   myCoinsText;
     [SerializeField] 
-    private GameObject         storePanelGo;
+    protected   GameObject         panelGo;
     [SerializeField] 
-    private GameObject         storeContent;
+    protected   GameObject         content;
     [SerializeField] 
-    private GameObject         itemExample;
+    protected   GameObject         itemExample;
 
-    private List<GameObject>   itemExamplePool      =   new List<GameObject>();
+    protected List<GameObject>   itemExamplePool      =   new List<GameObject>();
 
     private void Awake() 
     {
@@ -25,9 +28,9 @@ public class HudShopManager : MonoBehaviour
             Destroy(this);
     }
 
-    public void CloseShop()
+    public virtual void Close()
     {
-        storePanelGo.SetActive(false);
+        panelGo.SetActive(false);
 
         int count = itemExamplePool.Count;
         for (int i = 0; i < count; i++)
@@ -36,13 +39,14 @@ public class HudShopManager : MonoBehaviour
         }
     }
 
-    public void OpenShop(List<ClothesScriptable> itemList)
+    public virtual void Open(List<ClothesScriptable> itemList)
     {
-        storeContent.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
+        UpdateCoinShop();
+        content.GetComponent<RectTransform>().localPosition = new Vector3(0, 0, 0);
                    
         UpdateItens(GameManager.Instance.GetStoreData(itemList));
 
-        storePanelGo.SetActive(true);
+        panelGo.SetActive(true);
     }
 
     ItemShopContent GetItemListPool(GameObject pool,int comparePoolCount,Transform transform)
@@ -87,10 +91,10 @@ public class HudShopManager : MonoBehaviour
         return obj.GetComponent<ItemShopContent>();  
     }
 
-    void UpdateItens(List<StoreData> list)
+    protected void UpdateItens(List<StoreData> list)
     {
         int count = list.Count;
-        Transform transform = storeContent.transform;
+        Transform transform = content.transform;
         GameManager gm = GameManager.Instance;
         for (int i = 0; i < count; i++)
         {          
@@ -109,12 +113,17 @@ public class HudShopManager : MonoBehaviour
             }         
         }
 
-        RectTransform rt = storeContent.GetComponent<RectTransform>();
+        RectTransform rt = content.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(0, 827);//content default size
         float size = (float)count/3;//listCount/ content horizontal max size 
         if (size > 1)              
             rt.sizeDelta = new Vector2(0, 827 * (size+0.2f));
 
         rt.localPosition = new Vector3(0, 0, 0); 
+    }
+
+    public void UpdateCoinShop()
+    {
+        myCoinsText.text = GameManager.Instance.PlayerCoins+"";
     }
 }
