@@ -48,7 +48,6 @@ public class ItemContent : MonoBehaviour
 
     public virtual void SelectItem(ClothesScriptable _item)
     {
-        Debug.LogWarning("________SelectItem_______");
         ClothesScriptable beforeItem = GameManager.Instance.PlayerClothes.GetCurrentItem(_item.ClothesType);
 
         if(GameManager.Instance.PlayerEquipeCloth(_item))
@@ -57,7 +56,6 @@ public class ItemContent : MonoBehaviour
             _portraitImage.color    = new Color(0,0,0,1);
 
             HudInventoryManager.Instance.UpdateItem(beforeItem, true);
-            Debug.LogWarning("SelectItem -> "+_item.Name+" Change "+beforeItem);
         }      
     }
 }

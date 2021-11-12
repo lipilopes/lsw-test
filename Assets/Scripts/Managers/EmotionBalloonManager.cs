@@ -27,9 +27,7 @@ public class EmotionBalloonManager : MonoBehaviour
                 active = false;
             else
                 emotion = defaultEmotion;
-        }           
-        
-        Debug.Log(name+" Balloon["+(active ? "On": "Off")+"] "+emotion);
+        }
 
         if(active)
             emoteSpriteRender.sprite = GameManager.Instance.EmotionBalloon(emotion);
