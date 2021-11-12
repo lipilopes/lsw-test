@@ -66,6 +66,16 @@ public class MobsClothes : MonoBehaviour
             ChangeGlasses(glasses);
     }
 
+    public ClothesScriptable GetCurrentItem(ClothesEnum itemType)
+    {
+        switch (itemType)
+        {
+            default:                    return Tshirt;
+            case ClothesEnum.Tshirt:    return Tshirt;
+            case ClothesEnum.Glasses:   return Glasses;
+        }       
+    }
+
     public void AnimClothes(float speed,float horizontal,float vertical)
     {
         if(tshirtObj.activeInHierarchy && tshirtAnim != null)
@@ -169,11 +179,11 @@ public class MobsClothes : MonoBehaviour
 
         switch (newClothe.ClothesType)
         {
-            default:break;
-            case ClothesEnum.Tshirt:  ChangeTshirt(newClothe); break;
-            case ClothesEnum.Glasses: ChangeGlasses(newClothe); break;
-        }
-
-        return false;
+            default: return false;
+            case ClothesEnum.Tshirt:  return ChangeTshirt(newClothe);
+            case ClothesEnum.Glasses: return ChangeGlasses(newClothe);
+        }   
     }
+
+
 }
