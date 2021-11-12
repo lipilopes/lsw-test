@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cba0430bba308b4986724895c2b09ee, type: 3}
+  m_Name: Tutorial_Quest
+  m_EditorClassIdentifier: 
+  _questName: Welcome
+  _questDescription: Sign your name at the desk to the north!
+  _bonusCoinComplete: 8
+  _bonusFriendPointCompletete: 1
+  _steps:
+  - npcTalk: {fileID: 11400000, guid: 22b211bd17b2cd84ebbccfb6f65a885d, type: 2}
+  - npcTalk: {fileID: 11400000, guid: 276753ce0d8337245b54bca20bff085f, type: 2}
