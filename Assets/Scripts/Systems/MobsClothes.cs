@@ -175,11 +175,6 @@ public class MobsClothes : MonoBehaviour
 
     public bool ChangeClothe(ClothesScriptable newClothe)
     {
-        #if !UNITY_EDITOR
-            if(tshirt == newTshirt)
-                return false;
-        #endif
-
         switch (newClothe.ClothesType)
         {
             default: return false;
