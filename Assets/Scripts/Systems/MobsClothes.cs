@@ -40,6 +40,9 @@ public class MobsClothes : MonoBehaviour
 
     private void Start() 
     {
+        if(tshirtObj == null)
+            return;
+
         tshirtAnim  = tshirtObj.GetComponent<Animator>();
         glassesAnim = glassesObj.GetComponent<Animator>();
 
@@ -50,7 +53,7 @@ public class MobsClothes : MonoBehaviour
 
         if(isPlayer)
         {
-            string ts  = PlayerPrefs.GetString("PlayerTshit");
+            string ts  = PlayerPrefs.GetString("PlayerPants");
             string gss = PlayerPrefs.GetString("PlayerGlasses");
             
             if(ts != "")
@@ -127,7 +130,7 @@ public class MobsClothes : MonoBehaviour
         }
 
         if(isPlayer)
-            PlayerPrefs.SetString("PlayerTshit",""+tshirt.Name);
+            PlayerPrefs.SetString("PlayerPants",""+tshirt.Name);
         
         return true;
     }
