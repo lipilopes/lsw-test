@@ -2,60 +2,55 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class ItemShopContent : MonoBehaviour
+public class ItemShopContent : ItemContent
 {
-    [SerializeField]
-    protected Button             _button;
     [Header("Top Panel")]
     [SerializeField]
     protected TextMeshProUGUI   _priceText;
     [SerializeField]
     protected TextMeshProUGUI   _nameText;
-    [Header("Circle")]
-    [SerializeField]
-    protected Image   _portrait;
-    [SerializeField]
-    protected Image   _item;
   
-    public Button Button{ get {return _button;}}
 
-    public void UpdatePortrait(Sprite img)
+    public void AddItem(bool canBuy,int price,ClothesScriptable _item)
     {
-        _portrait.sprite = img;
-    }
+        if(_item != item)
+        {
+            Button.onClick.RemoveAllListeners();
+            Button.onClick.AddListener(() =>  SelectItem(item));
+        }
+       
+        item = _item;
 
-    public void AddItem(bool canBuy,int price,ClothesScriptable item)
-    {
         Button.interactable = canBuy;
-        _item.gameObject.SetActive(canBuy);
+        _itemImage.gameObject.SetActive(canBuy);
      
-        _nameText.text  = item.Name;
-        _item.sprite    = item.PortraitSprite;
+        _nameText.text      = item.Name;
+        _itemImage.sprite   = item.PortraitSprite;
 
         if(item.isMultColor)
-            _item.color     = item.GetColor;
+            _itemImage.color = item.GetColor;
 
         if(canBuy)
         {
-            _portrait.color = new Color(0.61f, 0.61f, 0.61f, 1); 
-            Button.onClick.AddListener(() =>  BuyItem(item));   
+            _portraitImage.color = new Color(0.61f, 0.61f, 0.61f, 1);  
             _priceText.text = ""+price;
         }           
         else
         {
-            _portrait.color = new Color(0,0,0,1); 
-            _priceText.text = ""; 
-        } 
-       
+            _portraitImage.color    = new Color(0,0,0,1); 
+            _priceText.text         = ""; 
+        }        
     }
 
-    public void BuyItem(ClothesScriptable item)
+    public override void SelectItem(ClothesScriptable item)
     {
         if(GameManager.Instance.BuyItem(item))
         {
-            Button.interactable = false;
-            _portrait.color = new Color(0,0,0,1);
-            _priceText.text = "";
+            Button.interactable     = false;
+            _portraitImage.color    = new Color(0,0,0,1);
+            _priceText.text         = "";
+
+            HudShopManager.Instance.UpdateCoinShop();
         }
     }
 
