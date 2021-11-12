@@ -73,8 +73,6 @@ public class HudChatManager : MonoBehaviour
     {
         indexDialogue++;
 
-        Debug.Log("Dialogue "+indexDialogue+"/"+currentNpcDialogue.Dialogues.Length);
-
         if(indexDialogue >= currentNpcDialogue.Dialogues.Length)
         {
             CloseChatPanel();
