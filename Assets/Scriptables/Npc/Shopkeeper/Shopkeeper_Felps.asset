@@ -22,8 +22,8 @@ MonoBehaviour:
   _dialogues:
   - text: Can I have a discount?
     playerSpeaking: 1
-    showNpcPortrait: 0
-    portraitFeeling: 0
+    showNpcPortrait: 1
+    portraitFeeling: 3
     showPlayerPortrait: 1
     playerPortraitFeeling: 2
     emotionBalloon: 2
@@ -32,3 +32,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d950a5cb39ac339418c48cc52d4a6796, type: 2}
   - {fileID: 11400000, guid: d6d480920b90ec545847431be3e36844, type: 2}
   - {fileID: 11400000, guid: 57d0011c23b226c4f96ef986391691a8, type: 2}
+  questList: []
