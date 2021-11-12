@@ -25,10 +25,6 @@ public class ClothesScriptable : ScriptableObject
     private ClothesEnum _clothesType;
     public  ClothesEnum ClothesType { get { return _clothesType; } }
 
-    // [Tooltip("Shop Icon")]
-    // [SerializeField] Sprite _iconSprite;
-    // public Sprite IconSprite { get { return _iconSprite;}}
-
     [Header("Color")]
     [SerializeField]
     private bool _isMultColor;
