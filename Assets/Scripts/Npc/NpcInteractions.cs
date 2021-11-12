@@ -12,8 +12,8 @@ public class NpcInteractions : MonoBehaviour
     private bool interaction = false;
     private bool inChat = false;
 
-    private EmotionBalloonManager    emotion;
-    private EmotionBalloonManager    playerEmotion;
+    private EmotionBalloonManager   emotion;
+    private EmotionBalloonManager   playerEmotion;
     private NpcScriptable           scriptable;
     private NpcManager              manager;
 
@@ -72,7 +72,6 @@ public class NpcInteractions : MonoBehaviour
                 interaction = (bool)value;
         }
 
-
         switch (scriptable.Type)
         {
             default:
@@ -84,7 +83,11 @@ public class NpcInteractions : MonoBehaviour
             break;
 
             case NpcType.Shopkeeper:
-                OpenChat(true);
+                OpenChat();
+            break;
+
+            case NpcType.Quest:
+                OpenChat();
             break;
         }      
     }
@@ -105,14 +108,18 @@ public class NpcInteractions : MonoBehaviour
             break;
 
             case NpcType.Shopkeeper:
-                HudShopManager.Instance.CloseShop();
+                HudShopManager.Instance.Close();
+            break;
+
+            case NpcType.Quest:
+                HudQuestManager.Instance.Close();
             break;
         }
 
 
     }
 
-    void OpenChat(bool openShop=false)
+    void OpenChat()
     {
         if(interaction)
         {
@@ -135,8 +142,25 @@ public class NpcInteractions : MonoBehaviour
                 inChat = false;
                 Emotion();
 
-                if(openShop)
+            switch (scriptable.Type)
+            {
+                default:
+
+                break;
+
+                case NpcType.Speaker:
+                    
+                break;
+
+                case NpcType.Shopkeeper:
                     OpenShop();
+                break;
+
+                case NpcType.Quest:
+                    CheckQuest();
+                break;
+            }
+                    
 
                 return;
             }
@@ -153,9 +177,17 @@ public class NpcInteractions : MonoBehaviour
 
     void OpenShop()
     {
-        HudShopManager.Instance.CloseShop();
+        HudShopManager.Instance.Close();
         
         if(scriptable.StoreList.Count > 0)
-            HudShopManager.Instance.OpenShop(scriptable.StoreList);
+            HudShopManager.Instance.Open(scriptable.StoreList);
+    }
+
+    void CheckQuest()
+    {
+        if(scriptable.Quests.Count > 0)
+        {
+            GameManager.Instance.Quest(scriptable.Quests);
+        }
     }
 }
