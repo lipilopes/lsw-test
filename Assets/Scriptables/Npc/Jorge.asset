@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 21300012, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   - {fileID: 21300010, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   - {fileID: 21300014, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  _npcType: 1
   _dialogues:
   - text: Hello!!!
     playerSpeaking: 0
@@ -43,3 +44,4 @@ MonoBehaviour:
     playerPortraitFeeling: 1
     emotionBalloon: 6
     playerEmotionBalloon: 0
+  storeList: []
