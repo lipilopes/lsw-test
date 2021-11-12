@@ -31,6 +31,26 @@ public class StoreData
     public bool                 showInShop = true;
 }
 
+[System.Serializable]
+public class QuestManager
+{
+    public QuestScriptable    quest;
+    public int                currentStep   = -1;//-1 not started
+    public bool               completed     = false;
+
+    public void SetStep(int step,bool save=true)
+    {
+        currentStep = step;
+        if(currentStep >= quest.StepsToComplete)
+            completed = true;
+        
+        if(save)
+            PlayerPrefs.SetInt(quest.name+"Step",currentStep);
+    }
+}
+
+
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -38,6 +58,7 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     [SerializeField] 
     private GameObject              player;
+    MobsClothes playerClothes;
     [SerializeField]
     private int                     playerCoins;
     [SerializeField]
@@ -49,6 +70,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<StoreData> storeDatas = new List<StoreData>();
 
+    [Header("Questions")]
+    [SerializeField]
+    private List<QuestManager> quests = new List<QuestManager>();
+
     [Header("Emotions")]
     [SerializeField] 
     private Sprite[] emotions;
@@ -57,8 +82,27 @@ public class GameManager : MonoBehaviour
     public int          Coins           { get { return playerCoins; } }
     public int          FriendsPoints   { get { return playerFriendsPoints; } }
 
-    public  List<StoreData> GetStoreDatas  { get { return storeDatas; } }
-    //public  List<StoreData> GetShowInStore { get { return storeDatas.FindAll(x => x.showInShop == true); } }
+    public  List<StoreData>         GetStoreDatas       { get { return storeDatas; } }
+    //public  List<StoreData> GetShowInStore            { get { return storeDatas.FindAll(x => x.showInShop == true); } }
+    public  List<ClothesScriptable> GetInventory        { get { return playerInventory; } }
+    public  MobsClothes             PlayerClothes       { get { return playerClothes; } }
+    public  int                     PlayerCoins         { get { return playerCoins; } }
+    public  int                     PlayerFriendsPoints { get { return playerFriendsPoints; } }
+
+    public bool PlayerEquipeCloth(ClothesScriptable item)
+    {
+       return PlayerClothes.ChangeClothe(item);
+    }
+
+    public bool CanEquipeCloth(ClothesScriptable item)
+    {
+        switch (item.ClothesType)
+        {
+            default: return true;
+            case ClothesEnum.Tshirt:  return !(item == PlayerClothes.Tshirt);
+            case ClothesEnum.Glasses: return !(item == PlayerClothes.Glasses);
+        }
+    }
 
     private void Awake() 
     {
@@ -67,14 +111,11 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         else
-            Destroy(this);   
+            Destroy(this);  
+
+        playerClothes = Player.GetComponent<MobsClothes>(); 
 
         LoadPlayerPrefs(); 
-    }
-
-    public bool HasItem(ClothesScriptable item)
-    {
-        return PlayerPrefs.GetInt("Inventory"+item) == 1;
     }
 
     void LoadPlayerPrefs()
@@ -89,20 +130,37 @@ public class GameManager : MonoBehaviour
             if(PlayerPrefs.GetInt("Inventory"+item) == 1)
                 playerInventory.Add(item);
         }
+
+        count = quests.Count;
+        for (int i = 0; i < count; i++)
+        {
+           quests[i].SetStep(PlayerPrefs.GetInt(quests[i].quest.name+"Step",-1),false);
+        }
+    }
+
+    #region Player panel
+    public bool HasItem(ClothesScriptable item)
+    {
+        return PlayerPrefs.GetInt("Inventory"+item) == 1;
     }
 
     public void SetCoin(int value)
     {
         playerCoins += value;
         PlayerPrefs.SetInt("PlayerCoins",playerCoins);
+
+        HudPlayerPanel.Instance.UpdateCoins(playerCoins);
     }
 
     public void SetFriendsPoints(int value)
     {
         playerFriendsPoints += value;
         PlayerPrefs.SetInt("PlayerFriendsPoints",playerFriendsPoints);
+        HudPlayerPanel.Instance.UpdateFriendsPoints(playerFriendsPoints);
     }
+    #endregion
 
+    #region Store
     public bool BuyItem(ClothesScriptable item)
     {
         int price = GetStoreData(item).price;
@@ -113,7 +171,7 @@ public class GameManager : MonoBehaviour
             playerInventory.Add(item);
             SetCoin(-price);
 
-            Player.GetComponent<MobsClothes>().ChangeClothe(item);
+            PlayerEquipeCloth(item);
             return true;
         }
 
@@ -144,6 +202,89 @@ public class GameManager : MonoBehaviour
     {
         return GetStoreData(item).showInShop;
     }
+    #endregion
+
+    #region Quest
+    public QuestScriptable GetQuest(QuestScriptable item)
+    {
+        return quests.Find(x => x.quest == item).quest;
+    }
+
+    public bool MatchNpcQuest(NpcQuest item)
+    {
+        if(item != null)
+        {
+            QuestManager q = quests.Find(x => x.quest == item.quest && x.completed == false);
+
+            if(q !=null && q.currentStep == item.step)
+                return true;
+        }      
+
+        return false;
+    }
+
+    public void SetQuestStep(QuestScriptable item,int step)
+    {
+        int i = quests.FindIndex(x => x.quest == item);
+        
+        if(quests[i].completed)
+            return;
+
+        quests[i].currentStep = step;
+        PlayerPrefs.SetInt(item.name+"Step",step);
+    }
+
+    public void Quest(List<NpcQuest> nq)
+    {     
+        NpcQuest npcQuest = null;
+
+        if(nq.Count > 0)
+        {
+            foreach(NpcQuest t in nq) 
+            {
+                if(MatchNpcQuest(t))
+                {
+                    npcQuest = t;
+                    break;
+                }
+            }
+        }
+
+        if(npcQuest == null)
+            return;
+            
+        QuestScriptable quest   = npcQuest.quest;
+        int i = quests.FindIndex(x => x.quest == quest);
+
+        int currentStep = quests[i].currentStep;
+
+        Debug.Log("Quest() step "+currentStep);
+
+        if(currentStep == -1 && npcQuest.step == currentStep)
+        {
+            HudQuestManager.Instance.Open(quest);
+        }
+        else
+        { 
+            if(npcQuest.sumStep)
+            {
+                currentStep++;
+                quests[i].SetStep(currentStep);
+            }
+
+            //Dialog
+
+            if(quests[i].completed)
+            {
+                GameManager.Instance.SetCoin(quest.BonusCoinComplete);
+                GameManager.Instance.SetFriendsPoints(quest.BonusFriendPointComplete);
+                HudQuestManager.Instance.Open(quest, true);
+            }              
+          
+            Debug.Log(quest.name+" - "+currentStep+"/"+quest.StepsToComplete);
+        }
+    }
+    #endregion
 
     public Sprite EmotionBalloon(Emotions e)
     {
