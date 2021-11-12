@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8fe2ac8cb86d7a4bab9fde4649c88f9, type: 3}
-  m_Name: Tshirt_Blue
+  m_Name: Sunglasses_Blue
   m_EditorClassIdentifier: 
-  _name: Blue T-shirt
-  _portraitSprite: {fileID: 21300000, guid: 03653f13e0610d04e89033039491b405, type: 3}
-  _clothesType: 0
+  _name: Blue Sunglasses
+  _portraitSprite: {fileID: 1344221726588622668, guid: 013011f3dfa28e14d8c79c47b22edbb1, type: 3}
+  _clothesType: 1
   _isMultColor: 1
   _color: {r: 0.28235295, g: 0.5176471, b: 0.8313726, a: 1}
-  ControllerName: PlayerClothes
+  ControllerName: PlayerGlasses

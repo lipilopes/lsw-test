@@ -12,8 +12,8 @@ public class NpcInteractions : MonoBehaviour
     private bool interaction = false;
     private bool inChat = false;
 
-    private EmotionBalloonManager    emotion;
-    private EmotionBalloonManager    playerEmotion;
+    private EmotionBalloonManager   emotion;
+    private EmotionBalloonManager   playerEmotion;
     private NpcScriptable           scriptable;
     private NpcManager              manager;
 
@@ -72,19 +72,68 @@ public class NpcInteractions : MonoBehaviour
                 interaction = (bool)value;
         }
 
+        switch (scriptable.Type)
+        {
+            default:
+
+            break;
+
+            case NpcType.Speaker:
+                OpenChat();
+            break;
+
+            case NpcType.Shopkeeper:
+                OpenChat();
+            break;
+
+            case NpcType.Quest:
+                OpenChat();
+            break;
+        }      
+    }
+
+    void InteractionEnd()
+    {
+        playerEmotion.EmotionBalloon(false);
+        
+        switch (scriptable.Type)
+        {
+            default:
+
+            break;
+
+            case NpcType.Speaker:     
+                inChat = false;
+                HudChatManager.Instance.CloseChatPanel(); 
+            break;
+
+            case NpcType.Shopkeeper:
+                HudShopManager.Instance.Close();
+            break;
+
+            case NpcType.Quest:
+                HudQuestManager.Instance.Close();
+            break;
+        }
+
+
+    }
+
+    void OpenChat()
+    {
         if(interaction)
         {
             int i = -1;
 
             if(inChat)
             {
-                i = HudManager.Instance.NextDialogue(); 
+                i = HudChatManager.Instance.NextDialogue(); 
             }
             else
             {
                 inChat = true; 
 
-                i = HudManager.Instance.SetDialogue(scriptable,manager.GetClothes);          
+                i = HudChatManager.Instance.SetDialogue(scriptable,manager.GetClothes);          
             }
 
             if(i == -1)
@@ -92,21 +141,53 @@ public class NpcInteractions : MonoBehaviour
                 playerEmotion.EmotionBalloon(false);
                 inChat = false;
                 Emotion();
+
+            switch (scriptable.Type)
+            {
+                default:
+
+                break;
+
+                case NpcType.Speaker:
+                    
+                break;
+
+                case NpcType.Shopkeeper:
+                    OpenShop();
+                break;
+
+                case NpcType.Quest:
+                    CheckQuest();
+                break;
+            }
+                    
+
                 return;
             }
 
-            Dialogue d = scriptable.Dialogues[i];           
-            playerEmotion.EmotionBalloon(true,d.playerEmotionBalloon);     
+            Dialogue d = scriptable.Dialogues[i];  
+            playerEmotion.EmotionBalloon(true,d.playerEmotionBalloon); 
             Emotion(true,d.emotionBalloon);
-
         }
         else
+        {           
+            InteractionEnd();          
+        }        
+    }
+
+    void OpenShop()
+    {
+        HudShopManager.Instance.Close();
+        
+        if(scriptable.StoreList.Count > 0)
+            HudShopManager.Instance.Open(scriptable.StoreList);
+    }
+
+    void CheckQuest()
+    {
+        if(scriptable.Quests.Count > 0)
         {
-            playerEmotion.EmotionBalloon(false);
-
-            inChat = false;
-
-            HudManager.Instance.CloseChatPanel();           
+            GameManager.Instance.Quest(scriptable.Quests);
         }
     }
 }

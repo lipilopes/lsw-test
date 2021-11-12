@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 21300012, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   - {fileID: 21300010, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
   - {fileID: 21300014, guid: d79edf18a76e2654a9ac99f15de8b2b3, type: 3}
+  _npcType: 3
   _dialogues:
   - text: Hello!!!
     playerSpeaking: 0
@@ -36,10 +37,44 @@ MonoBehaviour:
     emotionBalloon: 3
     playerEmotionBalloon: 6
   - text: Byee
-    playerSpeaking: 0
+    playerSpeaking: 1
     showNpcPortrait: 1
-    portraitFeeling: 2
-    showPlayerPortrait: 0
-    playerPortraitFeeling: 1
+    portraitFeeling: 0
+    showPlayerPortrait: 1
+    playerPortraitFeeling: 2
     emotionBalloon: 6
     playerEmotionBalloon: 0
+  storeList: []
+  questList:
+  - sumStep: 1
+    step: -1
+    quest: {fileID: 11400000, guid: e57c29f38f70d484db7892f2418f0a33, type: 2}
+    dialogues:
+    - text: Waitt!!!
+      playerSpeaking: 0
+      showNpcPortrait: 1
+      portraitFeeling: 2
+      showPlayerPortrait: 1
+      playerPortraitFeeling: 0
+      emotionBalloon: 6
+      playerEmotionBalloon: 4
+    - text: Welcome!!!
+      playerSpeaking: 0
+      showNpcPortrait: 1
+      portraitFeeling: 2
+      showPlayerPortrait: 1
+      playerPortraitFeeling: 1
+      emotionBalloon: 6
+      playerEmotionBalloon: 3
+  - sumStep: 0
+    step: 0
+    quest: {fileID: 11400000, guid: e57c29f38f70d484db7892f2418f0a33, type: 2}
+    dialogues:
+    - text: Hey, don't forget sign your name at the desk to the north!
+      playerSpeaking: 0
+      showNpcPortrait: 1
+      portraitFeeling: 2
+      showPlayerPortrait: 0
+      playerPortraitFeeling: 0
+      emotionBalloon: 6
+      playerEmotionBalloon: 1
