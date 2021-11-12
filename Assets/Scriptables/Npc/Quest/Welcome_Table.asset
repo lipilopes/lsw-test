@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf308a92d2fe0344bab904a7b3ccf990, type: 3}
+  m_Name: Welcome_Table
+  m_EditorClassIdentifier: 
+  _name: 
+  _portrait: []
+  _npcType: 3
+  _dialogues: []
+  storeList: []
+  questList:
+  - sumStep: 1
+    step: 0
+    quest: {fileID: 11400000, guid: e57c29f38f70d484db7892f2418f0a33, type: 2}
+    dialogues:
+    - text: Is Here!
+      playerSpeaking: 1
+      showNpcPortrait: 0
+      portraitFeeling: 0
+      showPlayerPortrait: 1
+      playerPortraitFeeling: 1
+      emotionBalloon: 0
+      playerEmotionBalloon: 3
