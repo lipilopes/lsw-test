@@ -73,7 +73,7 @@ public class HudChatManager : MonoBehaviour
     {
         indexDialogue++;
 
-        if(indexDialogue >= currentNpcDialogue.Dialogues.Length)
+        if(indexDialogue >= currentNpcDialogue.Dialogues.Count)
         {
             CloseChatPanel();
 
@@ -138,7 +138,7 @@ public class HudChatManager : MonoBehaviour
     void UpdateNpcPortrait(bool active = true)
     {
         if(active)
-            npcPortraitImage.sprite     = currentNpcDialogue.Portrait(indexDialogue);  
+             npcPortraitImage.sprite     = currentNpcDialogue.Portrait(indexDialogue);  
         else
             npcPortraitImage.color      = new Color(1,1,1, 0);
 
