@@ -1,1 +1,8 @@
 animations keyframes 0, 16, 29, 41, 54
+
+PlayerPrefs                       type             key                        description
+"Inventory"+ClothesScriptable     int             "InventoryRed Tshirt"      Save buy itens [0 - 1]
+"PlayerCoins"                     int             "PlayerCoins"              Save amount of coins 
+"PlayerFriendsPoints"             int             "PlayerFriendsPoints"      Save amount of friends points 
+"PlayerTshit"+cloth.Name          string                                                                             
+"PlayerGlasses"+cloth.Name                                                      
