@@ -4,5 +4,6 @@ PlayerPrefs                       type             key                        de
 "Inventory"+ClothesScriptable     int             "InventoryRed Tshirt"      Save buy itens [0 - 1]
 "PlayerCoins"                     int             "PlayerCoins"              Save amount of coins 
 "PlayerFriendsPoints"             int             "PlayerFriendsPoints"      Save amount of friends points 
-"PlayerTshit"+cloth.Name          string                                                                             
-"PlayerGlasses"+cloth.Name                                                      
+"PlayerPants"+cloth.Name          string                                     Save current pants                                       
+"PlayerGlasses"+cloth.Name        string                                     Save current Glasses
+questName+"Step"                  int                                        Save step quest
