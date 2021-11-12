@@ -38,7 +38,7 @@ MonoBehaviour:
   - text: Byee
     playerSpeaking: 0
     showNpcPortrait: 1
-    portraitFeeling: 1
+    portraitFeeling: 2
     showPlayerPortrait: 0
     playerPortraitFeeling: 1
     emotionBalloon: 6
