@@ -4,9 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class HudManager : MonoBehaviour
+public class HudChatManager : MonoBehaviour
 {
-    public static HudManager Instance;
+    public static HudChatManager Instance;
 
     [SerializeField] 
     private Sprite  nullSprite;
@@ -40,10 +40,8 @@ public class HudManager : MonoBehaviour
 
     private PlayerManager      playerManager;
     private NpcScriptable      currentNpcDialogue;
-    // [SerializeField]
-    // private ClothesScriptable? currentTshirt;
-    // [SerializeField]
-    // private ClothesScriptable? currentGlasses;
+    private ClothesScriptable? currentTshirt;
+    private ClothesScriptable? currentGlasses;
 
     private void Awake() 
     {
@@ -63,17 +61,12 @@ public class HudManager : MonoBehaviour
     {
         currentNpcDialogue  = scriptable;
         indexDialogue       = -1;//Next Dialogue -> ++
-        //currentTshirt       = clothes.Tshirt;
-        //currentGlasses      = clothes.Glasses;
-
-        int r = NextDialogue();
-        
-        UpdatePlayerPortrait();
-        UpdateNpcPortrait(clothes.Tshirt, clothes.Glasses);
+        currentTshirt       = clothes.Tshirt;
+        currentGlasses      = clothes.Glasses;
 
         chatPanelGo.SetActive(true);
 
-        return r;
+        return NextDialogue();
     }
 
     public int NextDialogue()
@@ -85,6 +78,7 @@ public class HudManager : MonoBehaviour
         if(indexDialogue >= currentNpcDialogue.Dialogues.Length)
         {
             CloseChatPanel();
+
             return -1;
         }
         
@@ -112,47 +106,51 @@ public class HudManager : MonoBehaviour
 
         Dialogue d = currentNpcDialogue.Dialogues[indexDialogue];
 
-        if(d.showPlayerPortrait)
-            playerPortraitImage.sprite  = playerManager.GetScriptable.Portrait(d.playerPortraitFeeling);
-        else
-            playerPortraitImage.color   = new Color(1,1,1, 0);
-        
-        if(d.showNpcPortrait)
-            npcPortraitImage.sprite     = currentNpcDialogue == null ? NullSprite : currentNpcDialogue.Portrait(indexDialogue);  
-        else
-            npcPortraitImage.color   = new Color(1,1,1, 0);
+        UpdatePlayerPortrait(d.showPlayerPortrait); 
+
+        UpdateNpcPortrait(d.showNpcPortrait);          
 
         chatText.text           = dialogue.text;
         speakerNameText.text    = speakerName;
     }
 
-    public void UpdatePlayerPortrait()
+    public void UpdatePlayerPortrait(bool active = true)
     {
         ClothesScriptable?  mobTshirt       = playerManager.GetClothes.Tshirt;
-        ClothesScriptable?  mobGlasses      = playerManager.GetClothes.Glasses;    
-        
-        playerTshirtImage.sprite   = mobTshirt == null ? NullSprite : mobTshirt.PortraitSprite;
+        ClothesScriptable?  mobGlasses      = playerManager.GetClothes.Glasses;
+
+        if(active)
+            playerPortraitImage.sprite  = playerManager.GetScriptable.Portrait(currentNpcDialogue.Dialogues[indexDialogue].playerPortraitFeeling);  
+        else
+            playerPortraitImage.color   = new Color(1,1,1, 0);
+
+        playerTshirtImage.sprite   = mobTshirt == null || !active ? NullSprite : mobTshirt.PortraitSprite;
         if(playerTshirtImage.sprite != NullSprite)
             playerTshirtImage.color = mobTshirt.GetColor;
         else
             playerTshirtImage.color = new Color(0,0,0,0);
                 
-        playerGlassesImage.sprite  = mobGlasses == null ? NullSprite : mobGlasses.PortraitSprite;
+        playerGlassesImage.sprite  = mobGlasses == null || !active ? NullSprite : mobGlasses.PortraitSprite;
         if(playerGlassesImage.sprite != NullSprite)
             playerGlassesImage.color = mobGlasses.GetColor;
-            else
+        else
             playerGlassesImage.color = new Color(0,0,0,0); 
     }
 
-    void UpdateNpcPortrait(ClothesScriptable? currentTshirt,ClothesScriptable? currentGlasses)
+    void UpdateNpcPortrait(bool active = true)
     {
-        npcTshirtImage.sprite   = currentNpcDialogue == null || currentTshirt == null ? NullSprite : currentTshirt.PortraitSprite;
+        if(active)
+            npcPortraitImage.sprite     = currentNpcDialogue.Portrait(indexDialogue);  
+        else
+            npcPortraitImage.color      = new Color(1,1,1, 0);
+
+        npcTshirtImage.sprite   =  !active || currentTshirt == null ? NullSprite : currentTshirt.PortraitSprite;
         if(npcTshirtImage.sprite != NullSprite)
             npcTshirtImage.color = currentTshirt.GetColor;
         else
             npcTshirtImage.color = new Color(0,0,0,0);
 
-        npcGlassesImage.sprite  = currentNpcDialogue == null || currentGlasses == null ? NullSprite : currentGlasses.PortraitSprite;
+        npcGlassesImage.sprite  = !active || currentGlasses == null ? NullSprite : currentGlasses.PortraitSprite;
         if(npcGlassesImage.sprite != NullSprite)
             npcGlassesImage.color = currentGlasses.GetColor;
         else
